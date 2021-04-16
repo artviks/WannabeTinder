@@ -34,7 +34,7 @@ $container->add('pdo', Connection::make($config['database']));
 // controllers
 $container->add(PagesController::class, PagesController::class)
     ->addArgument('twig');
-$container->add(RegisterUsersController::class, RegisterUsersController::class);
+$container->add(RegisterUsersController::class, RegisterUsersController::class)->addArgument('twig');
 
 
 return $container;
