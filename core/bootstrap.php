@@ -1,12 +1,13 @@
 <?php
 
-use App\Controllers\PagesController;
-use App\Controllers\RegisterUsersController;
-use App\Repositories\Database\Connection;
+
 use League\Container\Container;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
+use WTinder\Controllers\PagesController;
+use WTinder\Controllers\RegisterUsersController;
+use WTinder\Services\Users\RegisterUsersService;
 
 
 $config = require '../config.php';
@@ -29,12 +30,14 @@ $container->add('pdo', Connection::make($config['database']));
 
 
 //services
-
+$container->add(RegisterUsersService::class, RegisterUsersService::class)
+    ->addArgument(RegisterUsersService::class);
 
 // controllers
 $container->add(PagesController::class, PagesController::class)
     ->addArgument('twig');
-$container->add(RegisterUsersController::class, RegisterUsersController::class)->addArgument('twig');
+$container->add(RegisterUsersController::class, RegisterUsersController::class)
+    ->addArgument(RegisterUsersService::class);
 
 
 return $container;

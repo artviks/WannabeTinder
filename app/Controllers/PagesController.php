@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controllers;
+namespace WTinder\Controllers;
 
 
 use Twig\Environment;

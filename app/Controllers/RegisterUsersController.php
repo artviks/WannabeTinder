@@ -1,30 +1,30 @@
 <?php
 
 
-namespace App\Controllers;
+namespace WTinder\Controllers;
 
+use WTinder\Services\Users\RegisterUsersRequest;
+use WTinder\Services\Users\RegisterUsersService;
 
-use App\Models\User;
-use Twig\Environment;
 
 class RegisterUsersController
 {
-    private Environment $twig;
+    private RegisterUsersService $service;
 
-    public function __construct(Environment $twig)
+    public function __construct(RegisterUsersService $service)
     {
-        $this->twig = $twig;
+        $this->service = $service;
     }
 
     public function register(): void
     {
-        $user = new User(
-            $_POST['name'],
-            $_POST['surname'],
-            $_POST['email'],
-            $_POST['password']
+        $this->service->execute(
+            new RegisterUsersRequest(
+                $_POST['name'],
+                $_POST['surname'],
+                $_POST['email'],
+                $_POST['password'],
+            )
         );
-
-        var_dump($user);
     }
 }

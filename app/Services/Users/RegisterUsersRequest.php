@@ -1,10 +1,10 @@
 <?php
 
 
-namespace WTinder\Models;
+namespace WTinder\Services\Users;
 
 
-class User
+class RegisterUsersRequest
 {
     private string $name;
     private string $surname;
@@ -16,17 +16,7 @@ class User
         $this->name = $name;
         $this->surname = $surname;
         $this->email = $email;
-        $this->setPassword($password);
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getSurname(): string
-    {
-        return $this->surname;
+        $this->password = $password;
     }
 
     public function getEmail(): string
@@ -34,16 +24,18 @@ class User
         return $this->email;
     }
 
+    public function getSurname(): string
+    {
+        return $this->surname;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
     public function getPassword(): string
     {
         return $this->password;
-    }
-
-    private function setPassword(string $password): void
-    {
-        $passwordEncrypted = password_hash($password, PASSWORD_DEFAULT);
-        if ($passwordEncrypted) {
-            $this->password = $passwordEncrypted;
-        }
     }
 }

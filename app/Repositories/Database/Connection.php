@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Database;
+namespace WTinder\Repositories\Database;
 
 use PDO;
 use PDOException;

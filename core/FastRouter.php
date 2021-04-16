@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace WTinder;
 
 use FastRoute;
 use League\Container\Container;
