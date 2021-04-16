@@ -5,24 +5,23 @@ namespace WTinder\Services\Users;
 
 
 use WTinder\Models\User;
-use WTinder\Repositories\Database\MySQLUsersRepository;
-use InvalidArgumentException;
+use WTinder\Repositories\UsersRepositoryInterface;
 
 class RegisterUsersService
 {
-    private MySQLUsersRepository $repository;
+    private UsersRepositoryInterface $repository;
 
-    public function __construct(MySQLUsersRepository $repository)
+    public function __construct(UsersRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
 
     public function execute(RegisterUsersRequest $request): void
     {
-        if ($this->repository->getByEmail($request->getEmail()) === null)
+
+        if ($this->repository->getByEmail($request->getEmail()))
         {
-            throw new InvalidArgumentException(
-                "User with {$request->getEmail()} already exists!");
+            throw new \InvalidArgumentException("{$request->getEmail()} already exists!");
         }
 
         $this->repository->store(

@@ -7,6 +7,9 @@ use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 use WTinder\Controllers\PagesController;
 use WTinder\Controllers\RegisterUsersController;
+use WTinder\Repositories\Database\Connection;
+use WTinder\Repositories\Database\MySQLUsersRepository;
+use WTinder\Repositories\UsersRepositoryInterface;
 use WTinder\Services\Users\RegisterUsersService;
 
 
@@ -27,11 +30,12 @@ $container->add('twig', $twig);
 $container->add('pdo', Connection::make($config['database']));
 
 //repositories
-
+$container->add(UsersRepositoryInterface::class, MySQLUsersRepository::class)
+    ->addArgument('pdo');
 
 //services
 $container->add(RegisterUsersService::class, RegisterUsersService::class)
-    ->addArgument(RegisterUsersService::class);
+    ->addArgument(UsersRepositoryInterface::class);
 
 // controllers
 $container->add(PagesController::class, PagesController::class)

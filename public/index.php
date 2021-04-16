@@ -1,6 +1,6 @@
 <?php
 
-use Core\FastRouter;
+use WTinder\FastRouter;
 
 require "../vendor/autoload.php";
 
