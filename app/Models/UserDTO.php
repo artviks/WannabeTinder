@@ -1,6 +1,6 @@
 <?php
 
-namespace WTinder\Services\Users;
+namespace WTinder\Models;
 
 
 class UserDTO

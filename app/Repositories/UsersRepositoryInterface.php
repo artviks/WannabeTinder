@@ -5,7 +5,7 @@ namespace WTinder\Repositories;
 
 
 use WTinder\Models\User;
-use WTinder\Services\Users\UserDTO;
+use WTinder\Models\UserDTO;
 
 interface UsersRepositoryInterface
 {

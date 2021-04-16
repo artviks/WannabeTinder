@@ -7,7 +7,7 @@ namespace WTinder\Repositories\Database;
 use PDO;
 use WTinder\Repositories\UsersRepositoryInterface;
 use WTinder\Models\User;
-use WTinder\Services\Users\UserDTO;
+use WTinder\Models\UserDTO;
 
 class MySQLUsersRepository implements UsersRepositoryInterface
 {
