@@ -1,0 +1,13 @@
+{% include 'Partials/header.twig' %}
+
+<h2 class="text-lg text-center font-bold m-10">Welcome to Wannabe Tinder</h2>
+
+<form method="POST" action="login">
+    <input type="email" name="email" placeholder="user@example.com">
+    <input type="password" name="password" placeholder="password">
+    <input type="submit" value="Sing in">
+</form>
+
+<a href="/register">Register</a>
+
+{% include 'Partials/footer.twig' %}
