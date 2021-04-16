@@ -1,0 +1,16 @@
+{
+    "name": "artur/wannabe-tinder",
+    "authors": [
+        {
+            "name": "Artūrs Vīksne",
+            "email": "artursviksne04@gmail.com"
+        }
+    ],
+    "require": {
+        "nikic/fast-route": "^1.3",
+        "league/container": "^3.3",
+        "twig/twig": "^3.3",
+        "phpunit/phpunit": "^9.5"
+    },
+    "description": ""
+}
