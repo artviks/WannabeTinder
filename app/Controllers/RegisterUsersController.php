@@ -26,6 +26,7 @@ class RegisterUsersController extends Controller
                     $_POST['surname'],
                     $_POST['email'],
                     $_POST['password'],
+                    $_POST['gender']
                 )
             );
         } catch (\InvalidArgumentException $e) {

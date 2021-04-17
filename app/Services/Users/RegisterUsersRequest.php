@@ -10,13 +10,15 @@ class RegisterUsersRequest
     private string $surname;
     private string $email;
     private string $password;
+    private string $gender;
 
-    public function __construct(string $name, string $surname, string $email, string $password)
+    public function __construct(string $name, string $surname, string $email, string $gender, string $password)
     {
         $this->name = $name;
         $this->surname = $surname;
         $this->email = $email;
         $this->password = $password;
+        $this->gender = $gender;
     }
 
     public function getEmail(): string
@@ -37,5 +39,10 @@ class RegisterUsersRequest
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getGender(): string
+    {
+        return $this->gender;
     }
 }

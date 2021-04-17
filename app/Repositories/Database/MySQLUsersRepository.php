@@ -21,11 +21,14 @@ class MySQLUsersRepository implements UsersRepositoryInterface
     public function store(User $user): void
     {
         $sql = sprintf(
-            "INSERT INTO users (name, surname, email, password) VALUES ('%s', '%s', '%s', '%s')",
+            "INSERT INTO users (name, surname, email, gender, password) 
+                    VALUES ('%s', '%s', '%s', '%s', '%s')",
             $user->getName(),
             $user->getSurname(),
             $user->getEmail(),
+            $user->getGender(),
             $user->getPassword()
+
         );
 
         $this->pdo->exec($sql);
@@ -45,7 +48,9 @@ class MySQLUsersRepository implements UsersRepositoryInterface
             $user['id'],
             $user['name'],
             $user['surname'],
-            $user['email']
+            $user['email'],
+            $user['gender'],
+            $user['password']
         );
     }
 }

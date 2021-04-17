@@ -29,7 +29,8 @@ class RegisterUsersService
                 $request->getName(),
                 $request->getSurname(),
                 $request->getEmail(),
-                $request->getPassword()
+                $request->getPassword(),
+                $request->getGender()
         ));
     }
 }

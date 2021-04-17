@@ -4,8 +4,6 @@
 namespace WTinder\Controllers;
 
 
-use Twig\Environment;
-
 class PagesController extends Controller
 {
     public function login(): void
