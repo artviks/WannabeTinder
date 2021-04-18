@@ -19,8 +19,13 @@ class Controller
         $this->twig->addExtension(new DebugExtension);
     }
 
-    public function render(string $view, array $vars = []): void
+    protected function render(string $view, array $vars = []): void
     {
         $this->twig->display($view, $vars);
+    }
+
+    protected function redirect(string $address): void
+    {
+        header('Location: ' . $address);
     }
 }

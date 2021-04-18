@@ -17,22 +17,21 @@ class SingInUsersService
         $this->repository = $repository;
     }
 
-    public function execute(SingInUsersRequest $request): ?UserDTO
+    public function execute(SingInUsersRequest $request): void
     {
         $user = $this->repository->getByEmail($request->getEmail());
 
         if ($user === null) {
             $this->errors['email'] = "{$request->getEmail()} not found!";
-            return null;
+            return;
         }
 
         if (!password_verify($request->getPassword(), $user->getPassword())) {
             $this->errors['password'] = "Invalid password";
-            return null;
+            return;
         }
 
-        $_SESSION['auth_id'] = $user->getEmail();
-        return $user;
+        $_SESSION['auth_email'] = $user->getEmail();
     }
 
     public function getErrors(): array

@@ -26,6 +26,13 @@ class SignInUsersController extends Controller
             )
         );
 
-        var_dump($this->service->getErrors());
+        $errors = $this->service->getErrors();
+
+        if (!empty($errors)) {
+            $this->render('errors.twig', $errors);
+            return;
+        }
+
+        $this->redirect('profile');
     }
 }

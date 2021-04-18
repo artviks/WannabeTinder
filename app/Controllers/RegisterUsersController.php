@@ -30,9 +30,9 @@ class RegisterUsersController extends Controller
                 )
             );
         } catch (\InvalidArgumentException $e) {
-            $this->render('error.twig', ['message' => $e->getMessage()]);
+            $this->render('errors.twig', ['message' => $e->getMessage()]);
         }
 
-        $this->render('login.twig');
+        $this->render('singIn.twig');
     }
 }

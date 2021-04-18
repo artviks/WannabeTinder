@@ -1,0 +1,19 @@
+{% include 'Partials/header.twig' %}
+{% include 'Partials/nav.twig' %}
+
+<h2 class="text-lg text-center font-bold m-10">Welcome, {{ user.getName }}!</h2>
+
+<ul>
+    <li>Name: {{ user.getName }}</li>
+    <li>Surname: {{ user.getSurname }}</li>
+    <li>Email: {{ user.getEmail }}</li>
+</ul>
+
+
+<form action="upload" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload" value="Browse">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
+
+{% include 'Partials/footer.twig' %}

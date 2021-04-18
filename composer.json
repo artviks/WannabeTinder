@@ -12,7 +12,10 @@
     "league/container": "^3.3",
     "twig/twig": "^3.3",
     "phpunit/phpunit": "^9.5",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "league/flysystem": "^2.0",
+    "doctrine/cache": "^1.10",
+    "intervention/image": "^2.5"
   },
   "autoload": {
     "psr-4": {
@@ -20,4 +23,3 @@
     }
   }
 }
-
