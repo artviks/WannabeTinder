@@ -28,7 +28,6 @@ class MySQLUsersRepository implements UsersRepositoryInterface
             $user->getEmail(),
             $user->getGender(),
             $user->getPassword()
-
         );
 
         $this->pdo->exec($sql);
@@ -45,7 +44,6 @@ class MySQLUsersRepository implements UsersRepositoryInterface
         }
 
         return new UserDTO(
-            $user['id'],
             $user['name'],
             $user['surname'],
             $user['email'],

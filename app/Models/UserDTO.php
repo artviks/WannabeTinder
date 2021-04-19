@@ -8,12 +8,10 @@ class UserDTO
     private string $name;
     private string $surname;
     private string $email;
-    private string $id;
     private string $gender;
     private string $password;
 
     public function __construct(
-        string $id,
         string $name,
         string $surname,
         string $email,
@@ -24,7 +22,6 @@ class UserDTO
         $this->name = $name;
         $this->surname = $surname;
         $this->email = $email;
-        $this->id = $id;
         $this->gender = $gender;
         $this->password = $password;
     }
@@ -42,11 +39,6 @@ class UserDTO
     public function getEmail(): string
     {
         return $this->email;
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
     }
 
     public function getGender(): string

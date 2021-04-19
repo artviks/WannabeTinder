@@ -38,4 +38,9 @@ class PagesController extends Controller
         ]);
     }
 
+    public function singOut(): void
+    {
+        session_destroy();
+        $this->redirect('/');
+    }
 }

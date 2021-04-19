@@ -4,15 +4,26 @@
 namespace WTinder\Services\Images;
 
 
+use WTinder\Models\Image;
+use WTinder\Models\UserHasImage;
+use WTinder\Repositories\ImageDataRepositoryInterface;
+use WTinder\Repositories\UsersImagesRepositoryInterface;
+
 class UploadImageService
 {
     private const TARGET_DIR = __DIR__ . "./../../../storage/pictures/";
     private const MAX_SIZE = 500000;
     private int $uploadOk = 1;
     private array $message = [];
+    private ImageDataRepositoryInterface $imageRepository;
+    private UsersImagesRepositoryInterface $usersImagesRepository;
 
-    public function __construct()
+    public function __construct(
+        ImageDataRepositoryInterface $imageRepository,
+        UsersImagesRepositoryInterface $usersImagesRepository)
     {
+        $this->imageRepository = $imageRepository;
+        $this->usersImagesRepository = $usersImagesRepository;
     }
 
     public function execute(string $name, string $tmpName, int $size): void
@@ -31,6 +42,12 @@ class UploadImageService
 
         if (move_uploaded_file($tmpName, $targetFile)) {
             $this->message['status'] = "The file " . basename($name) . " has been uploaded.";
+
+            $image = new Image($name, $targetFile);
+            $this->imageRepository->store($image);
+            $this->usersImagesRepository->store(
+                new UserHasImage($_SESSION['auth_email'], $image->getId())
+            );
         }
     }
 

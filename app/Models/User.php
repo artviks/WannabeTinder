@@ -9,8 +9,9 @@ class User
     private string $name;
     private string $surname;
     private string $email;
-    private string $password;
     private string $gender;
+    private string $password;
+    private string $id;
 
     public function __construct(
         string $name,
@@ -23,8 +24,8 @@ class User
         $this->name = $name;
         $this->surname = $surname;
         $this->email = $email;
-        $this->setPassword($password);
         $this->gender = $gender;
+        $this->setPassword($password);
     }
 
     public function getName(): string

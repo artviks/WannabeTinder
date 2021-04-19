@@ -12,6 +12,7 @@ return FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r)
     $r->addRoute('GET', '/', [PagesController::class, 'singIn']);
     $r->addRoute('GET', '/register', [PagesController::class, 'register']);
     $r->addRoute('GET', '/profile', [PagesController::class, 'profile']);
+    $r->addRoute('GET', '/singOut', [PagesController::class, 'singOut']);
 
     //RegisterUsersController
     $r->addRoute('POST', '/register', [RegisterUsersController::class, 'register']);
