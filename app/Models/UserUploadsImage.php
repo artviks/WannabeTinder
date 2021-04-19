@@ -4,7 +4,7 @@
 namespace WTinder\Models;
 
 
-class UserHasImage
+class UserUploadsImage
 {
     private string $userId;
     private string $imageId;

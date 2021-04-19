@@ -5,7 +5,7 @@ namespace WTinder\Services\Images;
 
 
 use WTinder\Models\Image;
-use WTinder\Models\UserHasImage;
+use WTinder\Models\UserUploadsImage;
 use WTinder\Repositories\ImageDataRepositoryInterface;
 use WTinder\Repositories\UsersImagesRepositoryInterface;
 
@@ -46,7 +46,7 @@ class UploadImageService
             $image = new Image($name, $targetFile);
             $this->imageRepository->store($image);
             $this->usersImagesRepository->store(
-                new UserHasImage($_SESSION['auth_email'], $image->getId())
+                new UserUploadsImage($_SESSION['auth_email'], $image->getId())
             );
         }
     }

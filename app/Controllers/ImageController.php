@@ -24,5 +24,7 @@ class ImageController extends Controller
             $_FILES["fileToUpload"]["tmp_name"],
             $_FILES["fileToUpload"]["size"]
         );
+
+        $this->redirect('profile');
     }
 }

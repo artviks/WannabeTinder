@@ -4,13 +4,13 @@
 namespace WTinder\Controllers;
 
 
-use WTinder\Services\Users\GetUsersService;
+use WTinder\Services\Profiles\GetProfileService;
 
 class PagesController extends Controller
 {
-    private GetUsersService $service;
+    private GetProfileService $service;
 
-    public function __construct(GetUsersService $service)
+    public function __construct(GetProfileService $service)
     {
         parent::__construct();
         $this->service = $service;
@@ -32,9 +32,9 @@ class PagesController extends Controller
 
     public function profile(): void
     {
-        $user = $this->service->execute($_SESSION['auth_email']);
+        $profile = $this->service->execute($_SESSION['auth_email']);
         $this->render('profile.twig', [
-            'user' => $user
+            'profile' => $profile
         ]);
     }
 

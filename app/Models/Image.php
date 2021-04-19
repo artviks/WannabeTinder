@@ -7,13 +7,13 @@ namespace WTinder\Models;
 class Image
 {
     private string $originalName;
-    private string $relativePath;
+    private string $absolutePath;
     private string $id;
 
-    public function __construct(string $originalName, string $relativePath, string $id = null)
+    public function __construct(string $originalName, string $absolutePath, string $id = null)
     {
         $this->originalName = $originalName;
-        $this->relativePath = $relativePath;
+        $this->absolutePath = $absolutePath;
         $this->id = $id ?: uniqid('', true);
     }
 
@@ -24,7 +24,10 @@ class Image
 
     public function getRelativePath(): string
     {
-        return $this->relativePath;
+        $parts = explode('/', $this->absolutePath);
+        $parts = array_reverse($parts);
+
+        return $parts[2] . '/' . $parts[1] . '/' . $parts[0];
     }
 
     public function getId(): string

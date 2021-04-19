@@ -4,11 +4,12 @@
 namespace WTinder\Repositories;
 
 
-use WTinder\Models\UserHasImage;
+use WTinder\Models\UserDTO;
+use WTinder\Models\UserUploadsImage;
 
 interface UsersImagesRepositoryInterface
 {
-    public function store(UserHasImage $userImage): void;
+    public function store(UserUploadsImage $userImage): void;
 
-    public function getImageId(string $userId): array;
+    public function getImageId(UserDTO $user): ?string;
 }
