@@ -30,12 +30,14 @@ class PagesController extends Controller
         $this->render('register.twig');
     }
 
-    public function profile(): void
+    public function profile()
     {
         $profile = $this->service->execute($_SESSION['auth_email']);
+
         $this->render('profile.twig', [
             'profile' => $profile
         ]);
+
     }
 
     public function singOut(): void

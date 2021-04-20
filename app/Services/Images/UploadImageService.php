@@ -11,7 +11,7 @@ use WTinder\Repositories\UsersImagesRepositoryInterface;
 
 class UploadImageService
 {
-    private const TARGET_DIR = __DIR__ . "./../../../storage/pictures/";
+    private const TARGET_DIR = __DIR__ . "./../../../public/Pictures/";
     private const MAX_SIZE = 500000;
     private int $uploadOk = 1;
     private array $message = [];

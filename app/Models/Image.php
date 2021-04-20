@@ -27,7 +27,7 @@ class Image
         $parts = explode('/', $this->absolutePath);
         $parts = array_reverse($parts);
 
-        return $parts[2] . '/' . $parts[1] . '/' . $parts[0];
+        return $parts[1] . '/' . $parts[0];
     }
 
     public function getId(): string
