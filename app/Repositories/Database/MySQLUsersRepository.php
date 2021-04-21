@@ -5,6 +5,7 @@ namespace WTinder\Repositories\Database;
 
 
 use PDO;
+use WTinder\Models\UsersCollection;
 use WTinder\Repositories\UsersRepositoryInterface;
 use WTinder\Models\User;
 use WTinder\Models\UserDTO;
@@ -50,5 +51,27 @@ class MySQLUsersRepository implements UsersRepositoryInterface
             $user['gender'],
             $user['password']
         );
+    }
+
+    public function getOppositeGender(UserDTO $user): UsersCollection
+    {
+        $gender = $user->getGender() === 'male' ? 'female' : 'male';
+
+        $sql = "SELECT * FROM users WHERE gender = '$gender'";
+        $statement = $this->pdo->query($sql);
+        $table = $statement->fetchAll();
+        $users = new UsersCollection();
+
+        foreach ($table as $someUser) {
+            $users->add(
+                new UserDTO(
+                    $someUser['name'],
+                    $someUser['surname'],
+                    $someUser['email'],
+                    $someUser['gender']
+                ));
+        }
+
+        return $users;
     }
 }

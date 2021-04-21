@@ -1,6 +1,7 @@
 <?php
 
 
+use WTinder\Controllers\AppController;
 use WTinder\Controllers\ImageController;
 use WTinder\Controllers\PagesController;
 use WTinder\Controllers\RegisterUsersController;
@@ -22,4 +23,8 @@ return FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r)
 
     //ImagesController
     $r->addRoute('POST', '/upload', [ImageController::class, 'upload']);
+
+    //AppController
+    $r->addRoute('GET', '/app', [AppController::class, 'showImages']);
+
 });

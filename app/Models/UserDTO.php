@@ -9,14 +9,14 @@ class UserDTO
     private string $surname;
     private string $email;
     private string $gender;
-    private string $password;
+    private ?string $password;
 
     public function __construct(
         string $name,
         string $surname,
         string $email,
         string $gender,
-        string $password
+        string $password = null
     )
     {
         $this->name = $name;
@@ -46,7 +46,7 @@ class UserDTO
         return $this->gender;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
