@@ -4,8 +4,10 @@
 namespace WTinder\Repositories\Database;
 
 
+use http\Client\Curl\User;
 use PDO;
 use WTinder\Models\Image;
+use WTinder\Models\UserDTO;
 use WTinder\Repositories\ImageDataRepositoryInterface;
 
 class MySQLImageDataRepository implements ImageDataRepositoryInterface
@@ -17,12 +19,12 @@ class MySQLImageDataRepository implements ImageDataRepositoryInterface
         $this->pdo = $pdo;
     }
 
-    public function store(Image $image): void
+    public function store(Image $image, UserDTO $user): void
     {
         $sql = sprintf(
-            "INSERT INTO images (id, original_name, path) 
+            "INSERT INTO images (user_email, original_name, path) 
                     VALUES ('%s', '%s', '%s')",
-            $image->getId(),
+            $user->getEmail(),
             $image->getOriginalName(),
             $image->getRelativePath()
         );
@@ -30,16 +32,15 @@ class MySQLImageDataRepository implements ImageDataRepositoryInterface
         $this->pdo->exec($sql);
     }
 
-    public function getBy(string $id): Image
+    public function getBy(UserDTO $user): Image
     {
-        $sql = "SELECT * FROM images WHERE id = '$id'";
+        $sql = "SELECT * FROM images WHERE user_email = '{$user->getEmail()}'";
         $statement = $this->pdo->query($sql);
         $image = $statement->fetch();
 
         return new Image(
             $image['original_name'],
-            $image['path'],
-            $image['id']
+            $image['path']
         );
     }
 }

@@ -9,16 +9,19 @@ use WTinder\Controllers\RegisterUsersController;
 use WTinder\Controllers\SignInUsersController;
 use WTinder\Repositories\Database\Connection;
 use WTinder\Repositories\Database\MySQLImageDataRepository;
+use WTinder\Repositories\Database\MySQLUsersLikesRepository;
 use WTinder\Repositories\Database\MySQLUsersImagesRepository;
 use WTinder\Repositories\Database\MySQLUsersRepository;
 use WTinder\Repositories\ImageDataRepositoryInterface;
+use WTinder\Repositories\UsersLikesRepositoryInterface;
 use WTinder\Repositories\UsersImagesRepositoryInterface;
 use WTinder\Repositories\UsersRepositoryInterface;
 use WTinder\Services\Images\UploadImageService;
 use WTinder\Services\Profiles\GetProfileService;
-use WTinder\Services\Profiles\GetOppositeProfilesService;
+use WTinder\Services\Profiles\GetOppositeProfileService;
 use WTinder\Services\Users\RegisterUsersService;
-use WTinder\Services\Users\SingInUsersService;
+use WTinder\Services\Users\SaveUsersChoicesService;
+use WTinder\Services\Users\SignInUsersService;
 
 
 $config = require '../config.php';
@@ -39,25 +42,38 @@ $container->add(ImageDataRepositoryInterface::class, MySQLImageDataRepository::c
 $container->add(UsersImagesRepositoryInterface::class, MySQLUsersImagesRepository::class)
     ->addArgument('pdo');
 
+$container->add(UsersLikesRepositoryInterface::class, MySQLUsersLikesRepository::class)
+    ->addArgument('pdo');
+
+
 //services
 $container->add(RegisterUsersService::class)
     ->addArgument(UsersRepositoryInterface::class);
 
-$container->add(SingInUsersService::class)
+$container->add(SignInUsersService::class)
     ->addArgument(UsersRepositoryInterface::class);
 
 $container->add(GetProfileService::class)
     ->addArguments([
         UsersRepositoryInterface::class,
         ImageDataRepositoryInterface::class,
-        UsersImagesRepositoryInterface::class
     ]);
 
 $container->add(UploadImageService::class)
     ->addArguments([ImageDataRepositoryInterface::class, UsersImagesRepositoryInterface::class]);
 
-$container->add(GetOppositeProfilesService::class)
-    ->addArguments([GetProfileService::class, UsersRepositoryInterface::class]);
+$container->add(GetOppositeProfileService::class)
+    ->addArguments([
+        UsersRepositoryInterface::class,
+        ImageDataRepositoryInterface::class
+    ]);
+
+$container->add(SaveUsersChoicesService::class)
+    ->addArguments([
+        UsersLikesRepositoryInterface::class,
+        UsersRepositoryInterface::class
+    ]);
+
 
 // controllers
 $container->add(PagesController::class)
@@ -67,13 +83,13 @@ $container->add(RegisterUsersController::class)
     ->addArgument(RegisterUsersService::class);
 
 $container->add(SignInUsersController::class)
-    ->addArgument(SingInUsersService::class);
+    ->addArgument(SignInUsersService::class);
 
 $container->add(ImageController::class)
     ->addArgument(UploadImageService::class);
 
 $container->add(AppController::class)
-    ->addArgument(GetOppositeProfilesService::class);
+    ->addArguments([GetOppositeProfileService::class, SaveUsersChoicesService::class]);
 
 
 

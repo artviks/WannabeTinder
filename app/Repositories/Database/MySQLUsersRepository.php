@@ -34,44 +34,38 @@ class MySQLUsersRepository implements UsersRepositoryInterface
         $this->pdo->exec($sql);
     }
 
-    public function getByEmail(string $email): ?UserDTO
+    public function getBy(string $email, bool $password = false): UserDTO
     {
         $sql = "SELECT * FROM users WHERE email = '$email'";
         $statement = $this->pdo->query($sql);
         $user = $statement->fetch();
-
-        if(!$user) {
-            return null;
-        }
 
         return new UserDTO(
             $user['name'],
             $user['surname'],
             $user['email'],
             $user['gender'],
-            $user['password']
+            $password ? $user['password'] : null,
         );
     }
 
-    public function getOppositeGender(UserDTO $user): UsersCollection
+    public function getOppositeGender(UserDTO $user): UserDTO
     {
         $gender = $user->getGender() === 'male' ? 'female' : 'male';
 
-        $sql = "SELECT * FROM users WHERE gender = '$gender'";
+        $sql =
+            "SELECT * FROM users 
+                WHERE gender = '$gender' AND email NOT IN (SELECT person FROM users_likes)
+                LIMIT 1"
+        ;
         $statement = $this->pdo->query($sql);
-        $table = $statement->fetchAll();
-        $users = new UsersCollection();
+        $oppositeUser = $statement->fetch();
 
-        foreach ($table as $someUser) {
-            $users->add(
-                new UserDTO(
-                    $someUser['name'],
-                    $someUser['surname'],
-                    $someUser['email'],
-                    $someUser['gender']
-                ));
-        }
-
-        return $users;
+        return new UserDTO(
+            $oppositeUser['name'],
+            $oppositeUser['surname'],
+            $oppositeUser['email'],
+            $oppositeUser['gender']
+        );
     }
 }

@@ -8,12 +8,14 @@ use WTinder\Models\Profile;
 use WTinder\Repositories\ImageDataRepositoryInterface;
 use WTinder\Repositories\UsersRepositoryInterface;
 
-class GetProfileService
+class GetOppositeProfileService
 {
+
     private UsersRepositoryInterface $usersRepository;
     private ImageDataRepositoryInterface $imageRepository;
 
-    public function __construct(
+    public function __construct
+    (
         UsersRepositoryInterface $usersRepository,
         ImageDataRepositoryInterface $imageRepository
     )
@@ -25,12 +27,9 @@ class GetProfileService
     public function execute(string $email): Profile
     {
         $user = $this->usersRepository->getBy($email);
-        $image = $this->imageRepository->getBy($user);
+        $oppositeUser = $this->usersRepository->getOppositeGender($user);
+        $image = $this->imageRepository->getBy($oppositeUser);
 
-        if ($image === null) {
-            return new Profile($user);
-        }
-
-        return new Profile($user, $image);
+        return new Profile($oppositeUser, $image);
     }
 }

@@ -7,7 +7,7 @@ namespace WTinder\Services\Users;
 use WTinder\Models\UserDTO;
 use WTinder\Repositories\UsersRepositoryInterface;
 
-class SingInUsersService
+class SignInUsersService
 {
     private UsersRepositoryInterface $repository;
     private array $errors = [];
@@ -19,7 +19,7 @@ class SingInUsersService
 
     public function execute(SingInUsersRequest $request): void
     {
-        $user = $this->repository->getByEmail($request->getEmail());
+        $user = $this->repository->getBy($request->getEmail(), true);
 
         if ($user === null) {
             $this->errors['email'] = "{$request->getEmail()} not found!";

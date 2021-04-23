@@ -25,6 +25,7 @@ return FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r)
     $r->addRoute('POST', '/upload', [ImageController::class, 'upload']);
 
     //AppController
-    $r->addRoute('GET', '/app', [AppController::class, 'showImages']);
+    $r->addRoute('GET', '/app', [AppController::class, 'show']);
+    $r->addRoute('POST', '/app', [AppController::class, 'saveChoice']);
 
 });

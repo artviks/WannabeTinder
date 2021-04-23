@@ -5,7 +5,7 @@ namespace WTinder\Controllers;
 
 
 use WTinder\Services\Images\UploadImageService;
-use WTinder\Services\Users\SingInUsersService;
+use WTinder\Services\Users\SignInUsersService;
 
 class ImageController extends Controller
 {

@@ -12,7 +12,7 @@ interface UsersRepositoryInterface
 {
     public function store(User $user): void;
 
-    public function getByEmail(string $email): ?UserDTO;
+    public function getBy(string $email, bool $password = false): UserDTO;
 
-    public function getOppositeGender(UserDTO $user): UsersCollection;
+    public function getOppositeGender(UserDTO $user): UserDTO;
 }

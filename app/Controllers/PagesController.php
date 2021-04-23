@@ -32,6 +32,7 @@ class PagesController extends Controller
 
     public function profile(): void
     {
+
         $profile = $this->service->execute($_SESSION['auth_email']);
 
         $this->render('profile.twig', [

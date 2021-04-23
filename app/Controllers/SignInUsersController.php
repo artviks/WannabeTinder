@@ -5,13 +5,13 @@ namespace WTinder\Controllers;
 
 
 use WTinder\Services\Users\SingInUsersRequest;
-use WTinder\Services\Users\SingInUsersService;
+use WTinder\Services\Users\SignInUsersService;
 
 class SignInUsersController extends Controller
 {
-    private SingInUsersService $service;
+    private SignInUsersService $service;
 
-    public function __construct(SingInUsersService $service)
+    public function __construct(SignInUsersService $service)
     {
         parent::__construct();
         $this->service = $service;

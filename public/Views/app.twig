@@ -1,11 +1,15 @@
 {% include 'Partials/header.twig' %}
 {% include 'Partials/nav.twig' %}
 
-{% for profile in profiles %}
-    <img src='{{ profile.getImage.getRelativePath }}'>
-    <form method="POST" action="/choice">
-        <input type="submit" name="choice" value="Yes">
+
+    <div class="flex justify-center">
+        <img src="{{ profile.getImage.getRelativePath }}" alt="{{ profile.getImage.getName }}">
+    </div>
+    <form method="POST" action="app">
+        <input type="hidden" name="user" value="{{profile.getUser.getEmail}}">
+        <input type="submit" name="choice" value="like">
+        <input type="submit" name="choice" value="dislike">
     </form>
-{% endfor %}
+
 
 {% include 'Partials/footer.twig' %}

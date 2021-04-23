@@ -5,10 +5,11 @@ namespace WTinder\Repositories;
 
 
 use WTinder\Models\Image;
+use WTinder\Models\UserDTO;
 
 interface ImageDataRepositoryInterface
 {
-    public function store(Image $image): void;
+    public function store(Image $image, UserDTO $user): void;
 
-    public function getBy(string $id): Image;
+    public function getBy(UserDTO $user): Image;
 }
