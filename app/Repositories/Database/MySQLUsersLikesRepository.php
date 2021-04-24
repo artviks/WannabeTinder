@@ -30,9 +30,16 @@ class MySQLUsersLikesRepository implements UsersLikesRepositoryInterface
         $this->pdo->exec($sql);
     }
 
-    public function getLiked(UserDTO $user): array
+    public function getMatch(UserDTO $user): array
     {
-        $sql = "SELECT * FROM users_likes WHERE liked = 1 AND user_email = '{$user->getEmail()}'";
+        $sql =
+            "SELECT person 
+            FROM users_likes 
+            WHERE user_email = '{$user->getEmail()}' AND liked = 'like' AND person IN 
+                (SELECT user_email 
+                FROM users_likes 
+                WHERE person = '{$user->getEmail()}' AND liked = 'like')"
+        ;
         $statement = $this->pdo->query($sql);
 
         return $statement->fetchAll();

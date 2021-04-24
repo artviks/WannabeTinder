@@ -26,6 +26,7 @@ return FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r)
 
     //AppController
     $r->addRoute('GET', '/app', [AppController::class, 'show']);
+    $r->addRoute('GET', '/match', [AppController::class, 'matches']);
     $r->addRoute('POST', '/app', [AppController::class, 'saveChoice']);
 
 });

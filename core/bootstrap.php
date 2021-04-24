@@ -19,6 +19,7 @@ use WTinder\Repositories\UsersRepositoryInterface;
 use WTinder\Services\Images\UploadImageService;
 use WTinder\Services\Profiles\GetProfileService;
 use WTinder\Services\Profiles\GetOppositeProfileService;
+use WTinder\Services\Users\FindUsersMatchService;
 use WTinder\Services\Users\RegisterUsersService;
 use WTinder\Services\Users\SaveUsersChoicesService;
 use WTinder\Services\Users\SignInUsersService;
@@ -74,6 +75,12 @@ $container->add(SaveUsersChoicesService::class)
         UsersRepositoryInterface::class
     ]);
 
+$container->add(FindUsersMatchService::class)
+    ->addArguments([
+        UsersLikesRepositoryInterface::class,
+        UsersRepositoryInterface::class
+    ]);
+
 
 // controllers
 $container->add(PagesController::class)
@@ -89,7 +96,11 @@ $container->add(ImageController::class)
     ->addArgument(UploadImageService::class);
 
 $container->add(AppController::class)
-    ->addArguments([GetOppositeProfileService::class, SaveUsersChoicesService::class]);
+    ->addArguments([
+        GetOppositeProfileService::class,
+        SaveUsersChoicesService::class,
+        FindUsersMatchService::class
+    ]);
 
 
 

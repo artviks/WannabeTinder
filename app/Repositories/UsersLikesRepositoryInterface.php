@@ -11,5 +11,5 @@ interface UsersLikesRepositoryInterface
 {
     public function save(UserUser $userUser): void;
 
-    public function getLiked(UserDTO $user): array;
+    public function getMatch(UserDTO $user): array;
 }
