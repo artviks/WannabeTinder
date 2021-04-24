@@ -1,0 +1,17 @@
+{% include 'Partials/header.twig' %}
+{% include 'Partials/nav.twig' %}
+
+
+{% for profile in profiles %}
+    <div class="flex justify-center">
+        <img src='{{ profile.getImage.getRelativePath }}' alt="{{ profile.getUser.getName }}" >
+    </div>
+
+    <ul>
+        <li>Name: {{ profile.getUser.getName }}</li>
+        <li>Surname: {{ profile.getUser.getSurname }}</li>
+        <li>Email: {{ profile.getUser.getEmail }}</li>
+    </ul>
+{% endfor %}
+
+{% include 'Partials/footer.twig' %}

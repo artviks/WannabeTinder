@@ -78,7 +78,8 @@ $container->add(SaveUsersChoicesService::class)
 $container->add(FindUsersMatchService::class)
     ->addArguments([
         UsersLikesRepositoryInterface::class,
-        UsersRepositoryInterface::class
+        UsersRepositoryInterface::class,
+        GetProfileService::class
     ]);
 
 

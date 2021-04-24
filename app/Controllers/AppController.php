@@ -50,6 +50,8 @@ class AppController extends Controller
 
     public function matches(): void
     {
-        var_dump($this->matchService->execute($_SESSION['auth_email']));
+        $this->render('match.twig', [
+            'profiles' => $this->matchService->execute($_SESSION['auth_email'])->getCollection()
+        ]);
     }
 }
