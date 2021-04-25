@@ -2,10 +2,10 @@
 {% include 'Partials/nav.twig' %}
 
 
-    <div class="flex justify-center">
+    <div class="app">
         <img src="{{ profile.getImage.getRelativePath }}" alt="{{ profile.getImage.getName }}">
     </div>
-    <form method="POST" action="app">
+    <form class="app" method="POST" action="app">
         <input type="hidden" name="user" value="{{profile.getUser.getEmail}}">
         <input type="submit" name="choice" value="like">
         <input type="submit" name="choice" value="dislike">

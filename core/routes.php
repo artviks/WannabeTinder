@@ -14,6 +14,7 @@ return FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r)
     $r->addRoute('GET', '/register', [PagesController::class, 'register']);
     $r->addRoute('GET', '/profile', [PagesController::class, 'profile']);
     $r->addRoute('GET', '/singOut', [PagesController::class, 'singOut']);
+    $r->addRoute('GET', '/match', [PagesController::class, 'matches']);
 
     //RegisterUsersController
     $r->addRoute('POST', '/register', [RegisterUsersController::class, 'register']);
@@ -26,7 +27,6 @@ return FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r)
 
     //AppController
     $r->addRoute('GET', '/app', [AppController::class, 'show']);
-    $r->addRoute('GET', '/match', [AppController::class, 'matches']);
     $r->addRoute('POST', '/app', [AppController::class, 'saveChoice']);
 
 });

@@ -85,7 +85,10 @@ $container->add(FindUsersMatchService::class)
 
 // controllers
 $container->add(PagesController::class)
-    ->addArgument(GetProfileService::class);
+    ->addArguments([
+        GetProfileService::class,
+        FindUsersMatchService::class
+    ]);
 
 $container->add(RegisterUsersController::class)
     ->addArgument(RegisterUsersService::class);
@@ -99,8 +102,7 @@ $container->add(ImageController::class)
 $container->add(AppController::class)
     ->addArguments([
         GetOppositeProfileService::class,
-        SaveUsersChoicesService::class,
-        FindUsersMatchService::class
+        SaveUsersChoicesService::class
     ]);
 
 

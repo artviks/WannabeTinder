@@ -75,3 +75,13 @@ input#submit:hover {
 .reg:hover {
     color: black;
 }
+
+.app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app img {
+    padding-top: 2rem;
+}

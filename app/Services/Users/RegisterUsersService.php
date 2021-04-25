@@ -19,7 +19,7 @@ class RegisterUsersService
     public function execute(RegisterUsersRequest $request): void
     {
 
-        if ($this->repository->getByEmail($request->getEmail()))
+        if ($this->repository->getBy($request->getEmail()))
         {
             throw new \InvalidArgumentException("{$request->getEmail()} already exists!");
         }

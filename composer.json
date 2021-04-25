@@ -15,7 +15,8 @@
     "ext-pdo": "*",
     "league/flysystem": "^2.0",
     "doctrine/cache": "^1.10",
-    "intervention/image": "^2.5"
+    "intervention/image": "^2.5",
+    "respect/validation": "^2.2"
   },
   "autoload": {
     "psr-4": {

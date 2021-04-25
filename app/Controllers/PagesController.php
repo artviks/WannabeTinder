@@ -5,15 +5,18 @@ namespace WTinder\Controllers;
 
 
 use WTinder\Services\Profiles\GetProfileService;
+use WTinder\Services\Users\FindUsersMatchService;
 
 class PagesController extends Controller
 {
     private GetProfileService $service;
+    private FindUsersMatchService $matchService;
 
-    public function __construct(GetProfileService $service)
+    public function __construct(GetProfileService $service, FindUsersMatchService $matchService)
     {
         parent::__construct();
         $this->service = $service;
+        $this->matchService = $matchService;
     }
 
     public function singIn(): void
@@ -39,6 +42,13 @@ class PagesController extends Controller
             'profile' => $profile
         ]);
 
+    }
+
+    public function matches(): void
+    {
+        $this->render('match.twig', [
+            'profiles' => $this->matchService->execute($_SESSION['auth_email'])->getCollection()
+        ]);
     }
 
     public function singOut(): void

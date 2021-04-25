@@ -13,19 +13,16 @@ class AppController extends Controller
 {
     private GetOppositeProfileService $service;
     private SaveUsersChoicesService $choicesService;
-    private FindUsersMatchService $matchService;
 
     public function __construct
     (
         GetOppositeProfileService $service,
-        SaveUsersChoicesService $choicesService,
-        FindUsersMatchService $matchService
+        SaveUsersChoicesService $choicesService
     )
     {
         parent::__construct();
         $this->service = $service;
         $this->choicesService = $choicesService;
-        $this->matchService = $matchService;
     }
 
     public function show(): void
@@ -53,12 +50,5 @@ class AppController extends Controller
         );
 
         $this->redirect('/app');
-    }
-
-    public function matches(): void
-    {
-        $this->render('match.twig', [
-            'profiles' => $this->matchService->execute($_SESSION['auth_email'])->getCollection()
-        ]);
     }
 }
