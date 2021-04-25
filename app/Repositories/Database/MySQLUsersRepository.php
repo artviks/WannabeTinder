@@ -61,6 +61,10 @@ class MySQLUsersRepository implements UsersRepositoryInterface
         $statement = $this->pdo->query($sql);
         $oppositeUser = $statement->fetch();
 
+        if (!$oppositeUser) {
+            throw new \OutOfBoundsException('No more users to show!');
+        }
+
         return new UserDTO(
             $oppositeUser['name'],
             $oppositeUser['surname'],

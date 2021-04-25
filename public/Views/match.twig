@@ -1,9 +1,10 @@
 {% include 'Partials/header.twig' %}
 {% include 'Partials/nav.twig' %}
 
+<h2>What do we have here?!</h2>
 
 {% for profile in profiles %}
-    <div class="flex justify-center">
+    <div class="profilePic">
         <img src='{{ profile.getImage.getRelativePath }}' alt="{{ profile.getUser.getName }}" >
     </div>
 

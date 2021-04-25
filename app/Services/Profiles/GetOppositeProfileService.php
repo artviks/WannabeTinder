@@ -10,7 +10,6 @@ use WTinder\Repositories\UsersRepositoryInterface;
 
 class GetOppositeProfileService
 {
-
     private UsersRepositoryInterface $usersRepository;
     private ImageDataRepositoryInterface $imageRepository;
 

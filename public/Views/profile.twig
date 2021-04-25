@@ -1,11 +1,11 @@
 {% include 'Partials/header.twig' %}
 {% include 'Partials/nav.twig' %}
 
-<h2 class="text-lg text-center font-bold m-10">Welcome, {{ profile.getUser.getName }}!</h2>
+<h2 class="title">Welcome, {{ profile.getUser.getName }}!</h2>
 
 
 {% if profile.getImage %}
-    <div class="flex justify-center">
+    <div class="profilePic">
         <img src='{{ profile.getImage.getRelativePath }}' alt="{{ profile.getUser.getName }}" >
     </div>
 {% endif %}

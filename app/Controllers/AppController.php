@@ -30,9 +30,16 @@ class AppController extends Controller
 
     public function show(): void
     {
-        $this->render('app.twig', [
-            'profile' => $this->service->execute($_SESSION['auth_email'])
-        ]);
+        try {
+            $this->render('app.twig', [
+                'profile' => $this->service->execute($_SESSION['auth_email'])
+            ]);
+        } catch (\OutOfBoundsException $e) {
+            $this->render('errors.twig', [
+                'message' => $e->getMessage()
+            ]);
+        }
+
     }
 
     public function saveChoice(): void
