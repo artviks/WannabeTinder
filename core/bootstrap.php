@@ -10,11 +10,9 @@ use WTinder\Controllers\SignInUsersController;
 use WTinder\Repositories\Database\Connection;
 use WTinder\Repositories\Database\MySQLImageDataRepository;
 use WTinder\Repositories\Database\MySQLUsersLikesRepository;
-use WTinder\Repositories\Database\MySQLUsersImagesRepository;
 use WTinder\Repositories\Database\MySQLUsersRepository;
 use WTinder\Repositories\ImageDataRepositoryInterface;
 use WTinder\Repositories\UsersLikesRepositoryInterface;
-use WTinder\Repositories\UsersImagesRepositoryInterface;
 use WTinder\Repositories\UsersRepositoryInterface;
 use WTinder\Services\Images\UploadImageService;
 use WTinder\Services\Profiles\GetProfileService;
@@ -61,7 +59,7 @@ $container->add(GetProfileService::class)
     ]);
 
 $container->add(UploadImageService::class)
-    ->addArguments([ImageDataRepositoryInterface::class, UsersImagesRepositoryInterface::class]);
+    ->addArguments([ImageDataRepositoryInterface::class]);
 
 $container->add(GetOppositeProfileService::class)
     ->addArguments([

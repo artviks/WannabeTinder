@@ -55,7 +55,11 @@ class MySQLUsersRepository implements UsersRepositoryInterface
 
         $sql =
             "SELECT * FROM users 
-                WHERE gender = '$gender' AND email NOT IN (SELECT person FROM users_likes)
+                WHERE gender = '$gender' AND email NOT IN (
+                    SELECT person 
+                    FROM users_likes 
+                    WHERE user_email = '{$user->getEmail()}'
+                    )
                 LIMIT 1"
         ;
         $statement = $this->pdo->query($sql);
