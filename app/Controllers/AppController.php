@@ -11,32 +11,15 @@ use WTinder\Services\Users\UserChoiceRequest;
 
 class AppController extends Controller
 {
-    private GetOppositeProfileService $service;
     private SaveUsersChoicesService $choicesService;
 
     public function __construct
     (
-        GetOppositeProfileService $service,
         SaveUsersChoicesService $choicesService
     )
     {
         parent::__construct();
-        $this->service = $service;
         $this->choicesService = $choicesService;
-    }
-
-    public function show(): void
-    {
-        try {
-            $this->render('app.twig', [
-                'profile' => $this->service->execute($_SESSION['auth_email'])
-            ]);
-        } catch (\OutOfBoundsException $e) {
-            $this->render('errors.twig', [
-                'message' => $e->getMessage()
-            ]);
-        }
-
     }
 
     public function saveChoice(): void

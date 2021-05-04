@@ -4,6 +4,7 @@
 namespace WTinder\Controllers;
 
 
+use WTinder\Services\Profiles\GetOppositeProfileService;
 use WTinder\Services\Profiles\GetProfileService;
 use WTinder\Services\Users\FindUsersMatchService;
 
@@ -11,12 +12,17 @@ class PagesController extends Controller
 {
     private GetProfileService $service;
     private FindUsersMatchService $matchService;
+    private GetOppositeProfileService $oppositeProfileService;
 
-    public function __construct(GetProfileService $service, FindUsersMatchService $matchService)
+    public function __construct(
+        GetProfileService $service,
+        GetOppositeProfileService $oppositeProfileService,
+        FindUsersMatchService $matchService)
     {
         parent::__construct();
         $this->service = $service;
         $this->matchService = $matchService;
+        $this->oppositeProfileService = $oppositeProfileService;
     }
 
     public function singIn(): void
@@ -51,9 +57,16 @@ class PagesController extends Controller
         ]);
     }
 
-    public function singOut(): void
+    public function app(): void
     {
-        session_destroy();
-        $this->redirect('/');
+        try {
+            $this->render('app.twig', [
+                'profile' => $this->oppositeProfileService->execute($_SESSION['auth_email'])
+            ]);
+        } catch (\OutOfBoundsException $e) {
+            $this->render('errors.twig', [
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 }

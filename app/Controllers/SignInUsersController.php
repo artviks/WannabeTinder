@@ -35,4 +35,10 @@ class SignInUsersController extends Controller
 
         $this->redirect('profile');
     }
+
+    public function singOut(): void
+    {
+        session_destroy();
+        $this->redirect('/');
+    }
 }

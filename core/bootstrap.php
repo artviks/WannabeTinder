@@ -85,6 +85,7 @@ $container->add(FindUsersMatchService::class)
 $container->add(PagesController::class)
     ->addArguments([
         GetProfileService::class,
+        GetOppositeProfileService::class,
         FindUsersMatchService::class
     ]);
 
