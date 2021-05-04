@@ -7,7 +7,7 @@ use League\Container\Container;
 
 class FastRouter
 {
-    public static function load(FastRoute\Dispatcher $dispatcher, Container $container): void
+    public static function load(FastRoute\Dispatcher $dispatcher, Container $container, array $middlewares): void
     {
         $routeInfo = $dispatcher->dispatch(
             self::requestMethod(),
@@ -25,9 +25,17 @@ class FastRouter
                 break;
             case FastRoute\Dispatcher::FOUND:
                 $handler = $routeInfo[1];
-                [$class, $method] = $handler;
+                [$controller, $method] = $handler;
 
-                $container->get($class)->$method();
+                $middlewareKey = $controller . '@' . $method;
+                $contrMiddlewares = $middlewares[$middlewareKey] ?? [];
+
+                foreach ($contrMiddlewares as $middleware)
+                {
+                    (new $middleware)->handle();
+                }
+
+                $container->get($controller)->$method();
 
                 break;
         }

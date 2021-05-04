@@ -8,6 +8,7 @@ require "../vendor/autoload.php";
 session_start();
 
 $routes = require '../core/routes.php';
-$container = require '../core/bootstrap.php';
+$container = require '../core/container.php';
+$middlewares = require '../core/middlewares.php';
 
-FastRouter::load($routes, $container);
+FastRouter::load($routes, $container, $middlewares);

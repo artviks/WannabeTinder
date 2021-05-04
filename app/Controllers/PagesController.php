@@ -27,10 +27,6 @@ class PagesController extends Controller
 
     public function singIn(): void
     {
-        if(isset($_SESSION['auth_email'])) {
-            $this->redirect('profile');
-        }
-
         $this->render('singIn.twig');
     }
 
@@ -41,13 +37,11 @@ class PagesController extends Controller
 
     public function profile(): void
     {
-
         $profile = $this->service->execute($_SESSION['auth_email']);
 
         $this->render('profile.twig', [
             'profile' => $profile
         ]);
-
     }
 
     public function matches(): void
