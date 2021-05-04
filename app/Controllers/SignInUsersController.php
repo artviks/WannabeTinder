@@ -29,7 +29,9 @@ class SignInUsersController extends Controller
         $errors = $this->service->getErrors();
 
         if (!empty($errors)) {
-            $this->render('errors.twig', $errors);
+            $this->render('errors.twig', [
+                'errors' => $errors
+            ]);
             return;
         }
 

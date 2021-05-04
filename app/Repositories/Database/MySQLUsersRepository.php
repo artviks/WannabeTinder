@@ -34,19 +34,22 @@ class MySQLUsersRepository implements UsersRepositoryInterface
         $this->pdo->exec($sql);
     }
 
-    public function getBy(string $email, bool $password = false): UserDTO
+    public function getBy(string $email, bool $password = false): ?UserDTO
     {
         $sql = "SELECT * FROM users WHERE email = '$email'";
         $statement = $this->pdo->query($sql);
         $user = $statement->fetch();
 
-        return new UserDTO(
-            $user['name'],
-            $user['surname'],
-            $user['email'],
-            $user['gender'],
-            $password ? $user['password'] : null,
-        );
+        if ($user) {
+            return new UserDTO(
+                $user['name'],
+                $user['surname'],
+                $user['email'],
+                $user['gender'],
+                $password ? $user['password'] : null,
+            );
+        }
+        return null;
     }
 
     public function getOppositeGender(UserDTO $user): UserDTO

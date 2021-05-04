@@ -9,8 +9,18 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-800">
-    <p class="mt-52 text-center text-gray-400 tracking-widest">
-        ERROR | {{ message }}
-    </p>
+    {% if message %}
+        <p class="mt-52 text-center text-gray-400 tracking-widest">
+            ERROR | {{ message }}
+        </p>
+    {% endif %}
+
+    {% if errors %}
+        {% for error in errors %}
+        <p class="mt-52 text-center text-gray-400 tracking-widest">
+            ERROR | {{ error }}
+        </p>
+        {% endfor %}
+    {% endif %}
 </body>
 </html>

@@ -4,8 +4,9 @@
 namespace WTinder\Controllers;
 
 
+use WTinder\Services\Images\UploadImageRequest;
 use WTinder\Services\Images\UploadImageService;
-use WTinder\Services\Users\SignInUsersService;
+use WTinder\Validators\ImageValidator;
 
 class ImageController extends Controller
 {
@@ -19,12 +20,28 @@ class ImageController extends Controller
 
     public function upload(): void
     {
-        $this->service->execute(
-            $_FILES["fileToUpload"]["name"],
-            $_FILES["fileToUpload"]["tmp_name"],
-            $_FILES["fileToUpload"]["size"]
-        );
+        $validator = new ImageValidator($_FILES["fileToUpload"]);
+        $validator->validate();
 
-        $this->redirect('profile');
+        if (empty($validator->getErrors())) {
+            try {
+                $this->service->execute(
+                    new UploadImageRequest(
+                        $_SESSION['auth_email'],
+                        $_FILES["fileToUpload"]["name"],
+                        $_FILES["fileToUpload"]["tmp_name"]
+                    )
+                );
+            } catch (\RuntimeException $e) {
+                $this->render('errors.twig', ['message' => $e->getMessage()]);
+                return;
+            }
+            $this->redirect('profile');
+            return;
+        }
+
+        $this->render('errors.twig', [
+            'errors' => $validator->getErrors()
+        ]);
     }
 }

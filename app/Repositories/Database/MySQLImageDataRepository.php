@@ -4,7 +4,6 @@
 namespace WTinder\Repositories\Database;
 
 
-use http\Client\Curl\User;
 use PDO;
 use WTinder\Models\Image;
 use WTinder\Models\UserDTO;

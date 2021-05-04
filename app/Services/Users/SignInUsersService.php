@@ -22,12 +22,12 @@ class SignInUsersService
         $user = $this->repository->getBy($request->getEmail(), true);
 
         if ($user === null) {
-            $this->errors['email'] = "{$request->getEmail()} not found!";
+            $this->errors[] = "{$request->getEmail()} not found!";
             return;
         }
 
         if (!password_verify($request->getPassword(), $user->getPassword())) {
-            $this->errors['password'] = "Invalid password";
+            $this->errors[] = "Invalid password";
             return;
         }
 
